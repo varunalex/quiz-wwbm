@@ -1,21 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import VerifiedUserOutlined from '@material-ui/icons/VerifiedUserOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import AutoForm from 'uniforms/AutoForm';
 import AutoField from 'uniforms-material/AutoField';
 import SubmitField from 'uniforms-material/SubmitField';
-import loginForm from './../simpleSchma/loginForm'
+
+import registerForm from '../simpleSchma/registerForm'
 
 const styles = theme => ({
   main: {
@@ -49,7 +45,7 @@ const styles = theme => ({
   },
 });
 
-function SignIn(props) {
+function Register(props) {
   const { classes } = props;
 
   return (
@@ -57,18 +53,20 @@ function SignIn(props) {
       <CssBaseline />
       <Paper className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <VerifiedUserOutlined />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign up
         </Typography>
-        <AutoForm schema={loginForm}className={classes.form}>
+        <AutoForm schema={registerForm}className={classes.form}>
           <FormControl margin="normal" required fullWidth>
             <AutoField name="username" />
           </FormControl>
           <FormControl margin="normal" required fullWidth>
-            <AutoField name="password" type="password"/>
-            <FormHelperText id="component-error-text"></FormHelperText>
+            <AutoField name="name" />
+          </FormControl>
+          <FormControl margin="normal" required fullWidth>
+            <AutoField name="organization" />
           </FormControl>
           <SubmitField
             fullWidth
@@ -83,8 +81,8 @@ function SignIn(props) {
   );
 }
 
-SignIn.propTypes = {
+Register.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(Register);
