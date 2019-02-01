@@ -4,15 +4,10 @@ import SimpleSchema from 'simpl-schema';
 const Schema = {};
 
 Schema.UserProfile = new SimpleSchema({
-  firstName: {
+  name: {
     type: String,
     min: 3,
-    label: 'First Name',
-    optional: true,
-  },
-  lastName: {
-    type: String,
-    label: 'Last Name',
+    label: 'Name',
     optional: true,
   },
 });
