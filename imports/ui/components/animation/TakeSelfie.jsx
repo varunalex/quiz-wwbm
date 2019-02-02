@@ -26,18 +26,15 @@ class TakeSelfie extends React.Component {
     this.timer = setInterval(() => {
       const now = this.state.loop;
       let text = "";
-      if(now == 7) this.props.clickSelfie();
+      if(now == 6) this.props.clickSelfie();
       
       if(now % 2) {
-        this.setState({loop: now + 1, checked: false, text: '' });
-      } else {
-        
-        
-        if(now == 2) text = "You Look so Nice!";
-        if(now == 4) text = "Let me Take a Selfie";
-        if(now == 6) text = "Smile 😁";
+        if(now == 1) text = "You Look so Nice!";
+        if(now == 3) text = "Let me Take a Selfie";
+        if(now == 5) text = "Smile 😁";
         this.setState({loop: now + 1, checked: true, text: text});
-        
+      } else {
+        this.setState({loop: now + 1, checked: false, text: '' });
       }
       
     }, 1000);
@@ -51,7 +48,7 @@ class TakeSelfie extends React.Component {
     const { classes } = this.props;
     const { checked, loop, text } = this.state;
     //console.log(loop, text);
-    if(loop == 8) clearInterval(this.timer);
+    if(loop == 7) clearInterval(this.timer);
     
 
     return (

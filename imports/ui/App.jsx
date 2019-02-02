@@ -10,7 +10,7 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import CaptureImage from './pages/CaptureImage.jsx';
 
-class App extends Component {
+class App extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -61,11 +61,11 @@ class App extends Component {
             return <CaptureImage />;
           }}
         />
-        <Route path="/logout"
+        <Route exact path="/logout"
           render={() => {
-            this.onEnterPrivatePage();
-            Meteor.logout();
-            return (<Redirect to="/login" />);
+            // this.onEnterPrivatePage();
+            Meteor.logout(() => {this.props.history.replace('/signup')});
+            return <h5>LogingOut...</h5>;
           }}
         />
       </Switch>

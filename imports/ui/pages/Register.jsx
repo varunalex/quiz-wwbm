@@ -37,24 +37,31 @@ class Register extends React.Component {
           loading: true,
         },
         () => {
-          Meteor.call('user.create', doc, (err, res) => {
+          const username = doc.username;
+          const data = {
+            username: username.replace(/\s/g, ""),
+            name: doc.name,
+            organization: doc.organization
+          };
+          Meteor.call('user.create', data, (err, res) => {
             if (res) {
               // Login
-              Meteor.loginWithPassword(doc.username, 'user123', (err) => {
+              Meteor.loginWithPassword(data.username, 'user123', (err) => {
                 if (err) {
                   // Trigger snackbar
-                  console.log(this.child);
-                  
                   this.child.handleClick('error', err.reason);
                 } else {
                   this.props.history.replace('/selfie');
                 }
               });
               this.setState({ success: true, loading: true });
+              this.child.handleClick('success', 'Greate! Let me see you in the next step.');
+              this.formRef.reset();
             } else {
               this.setState({ success: false, loading: false });
+              this.child.handleClick('error', err.reason);
             }
-            this.formRef.reset();
+            
           });
         },
       );
@@ -72,7 +79,7 @@ class Register extends React.Component {
           <VerifiedUserOutlined />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          I like to know little bit about you
         </Typography>
         <AutoForm schema={registerForm} className={classes.form}
         onSubmit={doc => this.handleSubmit(doc)} ref={(e) => { this.formRef = e; }}>
@@ -92,7 +99,7 @@ class Register extends React.Component {
             color="primary"
             disabled={loading}
             type="submit"
-          >Sign Up</Button>
+          >Next</Button>
           {loading && <CircularProgress size={24} className={classes.buttonProgress} /> }
           </div>
         </AutoForm>

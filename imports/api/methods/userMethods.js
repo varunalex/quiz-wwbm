@@ -12,7 +12,8 @@ Meteor.methods({
       password: 'user123',
       email: '',
       profile: {
-        name: options.name
+        name: options.name,
+        organization: options.organization
       }
     });
 

@@ -16,7 +16,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Webcam from "react-webcam";
 
 import formStyles from './../material-styles/form';
-import TakeSelfie from './../components/animation/TakeSelfie.jsx'
+import TakeSelfie from './../components/animation/TakeSelfie.jsx';
+import Snackbars from '../components/Snack.jsx';
 
 
 const styles = theme => ({
@@ -28,9 +29,11 @@ const styles = theme => ({
 });
 
 class CaptureImage extends React.Component {
-  state = { imageSrc: '', captured: false }
+  state = { imageSrc: '', captured: false, stream: false }
   constructor(props) {
     super(props);
+
+    this.onUserMedia = this.onUserMedia.bind(this);
   }
 
   setRef = webcam => {
@@ -47,9 +50,17 @@ class CaptureImage extends React.Component {
     });
   };
 
+  onUserMedia() {
+    this.setState({ stream: true });
+  }
+
+  onUserMediaError() {
+    this.child.handleClick('warning', 'You need allow camera permission to continue. Please click allow and refresh the page.');
+  }
+
   render() {
     const { classes } = this.props;
-    const { imageSrc, captured } = this.state;
+    const { imageSrc, captured, stream } = this.state;
 
     const videoConstraints = {
       width: 300,
@@ -61,8 +72,9 @@ class CaptureImage extends React.Component {
       <main className={classes.main}>
         <CssBaseline />
         <Paper className={classes.paper}>
-
-          <TakeSelfie clickSelfie={this.capture} />
+          {stream ? <TakeSelfie clickSelfie={this.capture} /> : 
+          <Typography component="h2" variant="h5">Waiting to see you!</Typography>
+        }
 
           {imageSrc ?
             <div>
@@ -83,6 +95,8 @@ class CaptureImage extends React.Component {
                 width={300}
                 videoConstraints={videoConstraints}
                 className="webcam-filter"
+                onUserMedia={this.onUserMedia}
+                onUserMediaError={this.onUserMediaError}
               />
             </div>
           }
@@ -100,7 +114,7 @@ class CaptureImage extends React.Component {
             </Avatar>
           }
 
-
+          <Snackbars onRef={ref => (this.child = ref)} />
         </Paper>
       </main>
     );

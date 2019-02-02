@@ -6,7 +6,6 @@ const registerForm = new SimpleSchema({
     min: 3,
     uniforms: {
       showInlineError: true,
-      autoFocus: true,
       variant: "outlined"
     }
   },

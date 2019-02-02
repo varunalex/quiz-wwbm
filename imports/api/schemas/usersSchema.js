@@ -12,8 +12,13 @@ Schema.UserProfile = new SimpleSchema({
   },
   image: {
     type: String,
+    optional: true,
     blackbox: true,
   },
+  organization: {
+    type: String,
+    optional: true,
+  }
 });
 
 Schema.Users = new SimpleSchema({
