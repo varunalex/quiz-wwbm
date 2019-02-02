@@ -106,7 +106,9 @@ class CaptureImage extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-              ><Link to="/coder-details">Let's GO</Link></Button>
+                component={Link}
+                to="/coder-details"
+              >Let's GO</Button>
             </center>
             :
             <Avatar className={classes.avatar}>

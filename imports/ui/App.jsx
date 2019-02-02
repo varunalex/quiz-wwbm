@@ -9,6 +9,7 @@ import {
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import CaptureImage from './pages/CaptureImage.jsx';
+import Dashboard from './pages/dashboard/Dashboard.jsx';
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -40,7 +41,7 @@ class App extends React.PureComponent {
         <Route exact path="/"
           render={() => {
             this.onEnterPublicPage();
-            return <Login />;
+            return <Login history={this.props.history} />;
           }}
         />
         <Route path="/signup"
@@ -59,6 +60,12 @@ class App extends React.PureComponent {
           render={() => {
             this.onEnterPrivatePage();
             return <CaptureImage />;
+          }}
+        />
+        <Route path="/dashboard"
+          render={() => {
+            this.onEnterPrivatePage();
+            return <Dashboard history={this.props.history} />;
           }}
         />
         <Route exact path="/logout"

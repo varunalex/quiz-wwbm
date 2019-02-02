@@ -37,16 +37,10 @@ class Register extends React.Component {
           loading: true,
         },
         () => {
-          const username = doc.username;
-          const data = {
-            username: username.replace(/\s/g, ""),
-            name: doc.name,
-            organization: doc.organization
-          };
-          Meteor.call('user.create', data, (err, res) => {
+          Meteor.call('user.create', doc, (err, res) => {
             if (res) {
               // Login
-              Meteor.loginWithPassword(data.username, 'user123', (err) => {
+              Meteor.loginWithPassword(doc.username, 'user123', (err) => {
                 if (err) {
                   // Trigger snackbar
                   this.child.handleClick('error', err.reason);
@@ -56,7 +50,6 @@ class Register extends React.Component {
               });
               this.setState({ success: true, loading: true });
               this.child.handleClick('success', 'Greate! Let me see you in the next step.');
-              this.formRef.reset();
             } else {
               this.setState({ success: false, loading: false });
               this.child.handleClick('error', err.reason);
