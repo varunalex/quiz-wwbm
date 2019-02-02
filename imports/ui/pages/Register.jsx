@@ -1,4 +1,4 @@
-import {Meteor} from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
@@ -12,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import AutoForm from 'uniforms/AutoForm';
 import AutoField from 'uniforms-material/AutoField';
-import SubmitField from 'uniforms-material/SubmitField';
 
+import Snackbars from '../components/Snack.jsx';
 import registerForm from '../simpleSchma/registerForm';
 import formStyles from './../material-styles/form';
 
@@ -39,7 +39,18 @@ class Register extends React.Component {
         () => {
           Meteor.call('user.create', doc, (err, res) => {
             if (res) {
-              this.setState({ success: true, loading: false });
+              // Login
+              Meteor.loginWithPassword(doc.username, 'user123', (err) => {
+                if (err) {
+                  // Trigger snackbar
+                  console.log(this.child);
+                  
+                  this.child.handleClick('error', err.reason);
+                } else {
+                  this.props.history.replace('/selfie');
+                }
+              });
+              this.setState({ success: true, loading: true });
             } else {
               this.setState({ success: false, loading: false });
             }
@@ -52,7 +63,6 @@ class Register extends React.Component {
   render() {
     const { classes } = this.props;
     const { loading, success } = this.state;
-    console.log(Meteor.userId());
     
     return(
       <main className={classes.main}>
@@ -86,6 +96,7 @@ class Register extends React.Component {
           {loading && <CircularProgress size={24} className={classes.buttonProgress} /> }
           </div>
         </AutoForm>
+        <Snackbars onRef={ref => (this.child = ref)} />
       </Paper>
     </main>
     );

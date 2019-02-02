@@ -8,11 +8,11 @@ import {
 } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+// import CaptureImage from './pages/CaptureImage.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.history);
 
     // binds
     this.onEnterPublicPage = this.onEnterPublicPage.bind(this);
@@ -34,6 +34,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(Meteor.userId());
     return (
       <Switch>
         <Route exact path="/"
@@ -45,13 +46,26 @@ class App extends Component {
         <Route path="/signup"
           render={() => {
             this.onEnterPublicPage();
-            return <Register />;
+            return <Register history={this.props.history} />;
           }}
         />
         <Route path="/add_quiz"
           render={() => {
             this.onEnterPrivatePage();
             return <Login />;
+          }}
+        />
+        <Route path="/selfie"
+          render={() => {
+            this.onEnterPrivatePage();
+            return <h3>Hello</h3>;
+          }}
+        />
+        <Route path="/logout"
+          render={() => {
+            this.onEnterPrivatePage();
+            Meteor.logout();
+            return (<Redirect to="/login" />);
           }}
         />
       </Switch>
