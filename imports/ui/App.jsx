@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
-// import CaptureImage from './pages/CaptureImage.jsx';
+import CaptureImage from './pages/CaptureImage.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class App extends Component {
         <Route path="/selfie"
           render={() => {
             this.onEnterPrivatePage();
-            return <h3>Hello</h3>;
+            return <CaptureImage />;
           }}
         />
         <Route path="/logout"

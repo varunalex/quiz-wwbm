@@ -10,6 +10,10 @@ Schema.UserProfile = new SimpleSchema({
     label: 'Name',
     optional: true,
   },
+  image: {
+    type: String,
+    blackbox: true,
+  },
 });
 
 Schema.Users = new SimpleSchema({

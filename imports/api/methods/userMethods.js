@@ -19,4 +19,12 @@ Meteor.methods({
     if(user_id) return true;
     else return false;
   },
+  // Add image
+  'user.image': function userImage(data) {
+    if(this.userId) {
+      Meteor.users.update({ _id: this.userId }, { $set: {'profile.image': data} });
+      return true;
+    } return false;
+    
+  },
 });
