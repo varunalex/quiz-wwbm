@@ -10,6 +10,7 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import CaptureImage from './pages/CaptureImage.jsx';
 import Dashboard from './pages/dashboard/Dashboard.jsx';
+import Question from './pages/dashboard/Question.jsx';
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -66,6 +67,12 @@ class App extends React.PureComponent {
           render={() => {
             this.onEnterPrivatePage();
             return <Dashboard history={this.props.history} />;
+          }}
+        />
+        <Route path="/question"
+          render={() => {
+            this.onEnterPrivatePage();
+            return <Question history={this.props.history} />;
           }}
         />
         <Route exact path="/logout"

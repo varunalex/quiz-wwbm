@@ -27,12 +27,21 @@ Schema.Question = new SimpleSchema({
     type: String,
     allowedValues: ['L1', 'L2', 'L3'],
   },
+  lang: {
+    type: String,
+    allowedValues: ['Si', 'En'],
+  },
   extra: {
     type: String,
     required: false,
   },
   status: {
     type: Number,
+    defaultValue: 1,
+  },
+  active: {
+    type: Number,
+    defaultValue: 1,
   },
 });
 

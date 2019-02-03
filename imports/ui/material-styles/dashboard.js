@@ -74,6 +74,9 @@ const dashboardStyle = theme => ({
   h5: {
     marginBottom: theme.spacing.unit * 2,
   },
+  qForm: {
+    flexGrow: 1,
+  }
 });
 
 export default dashboardStyle;

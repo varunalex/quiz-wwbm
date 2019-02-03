@@ -82,7 +82,7 @@ class Header extends React.Component {
           <Divider />
           <List>{mainListItems}</List>
           <Divider />
-          <List>{secondaryListItems}</List>
+          {/* <List>{secondaryListItems}</List> */}
         </Drawer>
       </div>
     );
