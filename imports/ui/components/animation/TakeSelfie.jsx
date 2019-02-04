@@ -48,7 +48,7 @@ class TakeSelfie extends React.Component {
     const { classes } = this.props;
     const { checked, loop, text } = this.state;
     //console.log(loop, text);
-    if(loop == 7) clearInterval(this.timer);
+    if(loop == 6) clearInterval(this.timer);
     
 
     return (

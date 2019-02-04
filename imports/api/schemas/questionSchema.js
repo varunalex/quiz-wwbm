@@ -47,6 +47,6 @@ Schema.Question = new SimpleSchema({
 
 QuestionCol.attachSchema(Schema.Question);
 
-const QuestionSchema = Schema.Order;
+const QuestionSchema = Schema.Question;
 export { QuestionSchema };
 export default QuestionCol;

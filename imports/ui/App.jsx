@@ -11,6 +11,7 @@ import Register from './pages/Register.jsx';
 import CaptureImage from './pages/CaptureImage.jsx';
 import Dashboard from './pages/dashboard/Dashboard.jsx';
 import Question from './pages/dashboard/Question.jsx';
+import MainIntro from './pages/MainIntro.jsx';
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -60,7 +61,13 @@ class App extends React.PureComponent {
         <Route path="/selfie"
           render={() => {
             this.onEnterPrivatePage();
-            return <CaptureImage />;
+            return <CaptureImage history={this.props.history} />;
+          }}
+        />
+        <Route path="/intro"
+          render={() => {
+            this.onEnterPrivatePage();
+            return <MainIntro history={this.props.history} />;
           }}
         />
         <Route path="/dashboard"

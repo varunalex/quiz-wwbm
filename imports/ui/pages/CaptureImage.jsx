@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Avatar from '@material-ui/core/Avatar';
@@ -34,6 +33,7 @@ class CaptureImage extends React.Component {
     super(props);
 
     this.onUserMedia = this.onUserMedia.bind(this);
+    this.clickStart = this.clickStart.bind(this);
   }
 
   setRef = webcam => {
@@ -56,6 +56,23 @@ class CaptureImage extends React.Component {
 
   onUserMediaError() {
     this.child.handleClick('warning', 'You need allow camera permission to continue. Please click allow and refresh the page.');
+  }
+
+  clickStart() {
+    const data = {
+      user_id: Meteor.userId(),
+      level: 1,
+      time: 0
+    }
+    this.child.handleClick('info', 'Almost there. Please wait');
+    Meteor.call('run.insert', data, (err) => {
+      if (err) {
+        // Trigger snackbar
+        this.child.handleClick('error', err.reason);
+      } else {
+        this.props.history.push('/intro');
+      }
+    });
   }
 
   render() {
@@ -106,9 +123,8 @@ class CaptureImage extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-                component={Link}
-                to="/coder-details"
-              >Let's GO</Button>
+                onClick={this.clickStart}
+              >Let's Start</Button>
             </center>
             :
             <Avatar className={classes.avatar}>
