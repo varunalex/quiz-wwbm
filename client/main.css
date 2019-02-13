@@ -2,3 +2,29 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+
+.webcam-wrap {
+  margin-top: 1em;
+}
+.webcam-filter {
+  -webkit-filter: brightness(1.5) saturate(1.5) contrast(1.5);
+  filter: brightness(1.5) saturate(1.5) contrast(1.5);
+}
+
+.MuiStepConnector-lineVertical-226 {
+  min-height: 15px !important;
+}
+
+.MuiTypography-body1-152 {
+  font-weight: bold !important;
+}
+
+.MuiTypography-h6-86 {
+  color: aliceblue !important;
+  font-size: 22px !important;
+}
+
+.question {
+  color: aliceblue !important;
+  font-size: 24px !important;
+}
