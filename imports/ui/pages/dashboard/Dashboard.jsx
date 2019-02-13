@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 
 import Header from './Header.jsx';
 //import Table from './../../components/Table.jsx';
+import RunCol from './../../../api/schemas/runSchema';
+import {ActiveQuestionCol} from './../../../api/schemas/questionSchema';
 import dashboardStyle from './../../material-styles/dashboard';
 
 class Dashboard extends React.Component {
@@ -13,6 +16,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log(this.props.activeRun, this.props.activeQuestion);
 
     return (
       <div className={classes.root}>
@@ -38,4 +42,16 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(dashboardStyle)(Dashboard);
+export default withTracker(props => {
+  // Do all your reactive data access in this method.
+  // Note that this subscription will get cleaned up when your component is unmounted
+  const handle = Meteor.subscribe('activeQuestion');
+  const handle2 = Meteor.subscribe('activeRun');
+
+  return {
+    runStatus: handle.ready(),
+    activeRun: RunCol.findOne({}),
+    qStatus: handle2.ready(),
+    activeQuestion: ActiveQuestionCol.findOne({}),
+  };
+})(withStyles(dashboardStyle)(Dashboard));

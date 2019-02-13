@@ -28,4 +28,7 @@ Meteor.methods({
     } return false;
     
   },
+  'user.getUser': function getUser(_id) {
+    return Meteor.users.find({ _id }).fetch();
+  },
 });

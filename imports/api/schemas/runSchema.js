@@ -28,6 +28,10 @@ Schema.Run = new SimpleSchema({
   time: {
     type: Number,
   },
+  score: {
+    type: Number,
+    defaultValue: 0,
+  },
   lang: {
     type: String,
     required: false,

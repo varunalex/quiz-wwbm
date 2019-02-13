@@ -73,7 +73,7 @@ class MainIntro extends React.Component {
   }
 
   onStopIntro() {
-    this.setState({ intro: false, playStatus: Sound.status.STOPPED });
+    this.setState({ intro: false, playStatus: Sound.status.PAUSED });
   }
 
   onChangeLang(e) {
@@ -115,16 +115,16 @@ class MainIntro extends React.Component {
             <Grid container justify="center" alignItems="center">
               <Intro userName={currentUser ? currentUser.profile.name : ''} />
             </Grid>
+            <Sound
+            url={currentTrack}
+            playStatus={playingStatus}
+            volume={100}
+            onFinishedPlaying={this.onStopIntro}
+            loop={false}
+          />
           </div>
-
+          
           : ''}
-        <Sound
-          url={currentTrack}
-          playStatus={playingStatus}
-          volume={100}
-          onFinishedPlaying={this.onStopIntro}
-          loop={false}
-        />
       </div>
     );
   }
@@ -167,7 +167,7 @@ class MainIntro extends React.Component {
                   label="English"
                   labelPlacement="end"
                 />
-                
+
               </Grid>
               <br /><br />
               <Grid container justify="center" alignItems="center">
@@ -176,6 +176,7 @@ class MainIntro extends React.Component {
                   Start
             </Button>
               </Grid>
+
             </div>
 
           </Slide> : ''}

@@ -12,6 +12,11 @@ import CaptureImage from './pages/CaptureImage.jsx';
 import Dashboard from './pages/dashboard/Dashboard.jsx';
 import Question from './pages/dashboard/Question.jsx';
 import MainIntro from './pages/MainIntro.jsx';
+import Ask from './pages/Ask.jsx';
+import Winner from './pages/Winner.jsx';
+import TimeOut from './pages/TimeOut.jsx';
+import WrongAnswer from './pages/WrongAnswer.jsx';
+import Screen from './pages/Screen.jsx'
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -68,6 +73,35 @@ class App extends React.PureComponent {
           render={() => {
             this.onEnterPrivatePage();
             return <MainIntro history={this.props.history} />;
+          }}
+        />
+        <Route path="/ask"
+          render={() => {
+            this.onEnterPrivatePage();
+            return <Ask history={this.props.history} />;
+          }}
+        />
+        <Route exact path="/winner"
+          render={() => {
+            this.onEnterPrivatePage();
+            return <Winner history={this.props.history} />;
+          }}
+        />
+        <Route exact path="/timeout"
+          render={() => {
+            this.onEnterPrivatePage();
+            return <TimeOut history={this.props.history} />;
+          }}
+        />
+        <Route exact path="/wronganswer"
+          render={() => {
+            this.onEnterPrivatePage();
+            return <WrongAnswer history={this.props.history} />;
+          }}
+        />
+        <Route exact path="/screen"
+          render={() => {
+            return <Screen history={this.props.history} />;
           }}
         />
         <Route path="/dashboard"
